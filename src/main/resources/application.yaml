@@ -1,0 +1,38 @@
+server:
+  port: ${LEGALBASES_SERVER_PORT} # Assuming a different port to avoid conflict with legalCase (8081)
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  application:
+    name: legalbases
+  datasource:
+    url: ${LEGALBASES_SPRING_DATASOURCE_URL}
+    username: ${LEGALBASES_SPRING_DATASOURCE_USERNAME}
+    password: ${LEGALBASES_SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: legal_bases
+external:
+  api:
+    datosgovco:
+      host: ${LEGALBASES_EXTERNAL_API_DATOSGOVCO_HOST}
+      endpoint: ${LEGALBASES_EXTERNAL_API_DATOSGOVCO_ENDPOINT}
+
+aws:
+  accessKey: ${LEGALBASES_AWS_ACCESSKEY}
+  secretKey: ${LEGALBASES_AWS_SECRETKEY}
+  s3:
+    region: us-east-1
+    bucketname: normatives
+
+
+logging:
+  level:
+    com.tys.legalbases.infrastructure.external.DatosGovCoFeignClient: DEBUG
